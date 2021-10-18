@@ -6,6 +6,7 @@ specifiers:
   '@types/micromodal': ^0.3.3
   micromodal: ^0.4.6
   navaid: ^1.2.0
+  pnpm: ^6.17.2
   prettier: ^2.4.1
   rxjs: ^7.4.0
   svelte: ^3.37.0
@@ -24,6 +25,7 @@ devDependencies:
   '@sveltejs/vite-plugin-svelte': 1.0.0-next.27_svelte@3.43.1+vite@2.6.5
   '@tsconfig/svelte': 2.0.1
   '@types/micromodal': 0.3.3
+  pnpm: 6.17.2
   prettier: 2.4.1
   svelte: 3.43.1
   svelte-check: 2.2.7_svelte@3.43.1
@@ -582,6 +584,12 @@ packages:
   /picomatch/2.3.0:
     resolution: {integrity: sha512-lY1Q/PiJGC2zOv/z391WOTD+Z02bCgsFfvxoXXf6h7kv9o+WmsmzYqrAwY63sNgOxE4xEdq0WyUnXfKeBrSvYw==}
     engines: {node: '>=8.6'}
+    dev: true
+
+  /pnpm/6.17.2:
+    resolution: {integrity: sha512-hEoGmkr9Gwc2QG9zeRSaRraXCcnDY+7/xr+7B2tg9EXfKBnQZblx8KCa/PZ5iVp9o9aNFC7Qg8pGcaAlsgQGrQ==}
+    engines: {node: '>=12.17'}
+    hasBin: true
     dev: true
 
   /postcss/8.3.9:

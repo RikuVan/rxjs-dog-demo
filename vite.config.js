@@ -4,9 +4,12 @@ import prettier from 'prettier'
 import { svelte } from '@sveltejs/vite-plugin-svelte'
 
 // https://vitejs.dev/config/
-export default defineConfig(({ mode }) => ({
-  plugins: [svelte(), createAssetManifest(mode === 'production')],
-}))
+export default defineConfig(({ mode }) => {
+  const prod = mode === 'production'
+  return {
+    plugins: [svelte(), createAssetManifest(mode === 'production')],
+  }
+})
 
 function createAssetManifest() {
   return {
