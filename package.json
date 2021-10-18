@@ -1,0 +1,29 @@
+{
+  "name": "rxjs-svelte-examples",
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "prebuild": "test \"$CI\" = true && npx pnpm install -r --store=node_modules/.pnpm-store || echo skipping pnpm install",
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview",
+    "check": "svelte-check --tsconfig ./tsconfig.json"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^1.0.0-next.11",
+    "@tsconfig/svelte": "^2.0.1",
+    "@types/micromodal": "^0.3.3",
+    "prettier": "^2.4.1",
+    "svelte": "^3.37.0",
+    "svelte-check": "^2.1.0",
+    "svelte-preprocess": "^4.7.2",
+    "tslib": "^2.2.0",
+    "typescript": "^4.3.2",
+    "vite": "^2.6.4"
+  },
+  "dependencies": {
+    "micromodal": "^0.4.6",
+    "navaid": "^1.2.0",
+    "rxjs": "^7.4.0"
+  }
+}
