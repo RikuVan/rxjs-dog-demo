@@ -1,54 +1,13 @@
 <script lang="ts">
-  import { onMount, afterUpdate } from 'svelte'
-  import Button from './lib/Button.svelte'
   import ImagePreviewer from './ImagePreviewer.svelte'
   import Modal from './lib/Modal.svelte'
   import Carousel from './lib/Carousel.svelte'
-
-  const SCHEME = '(prefers-color-scheme: dark)'
-  enum Theme {
-    Dark = 'dark',
-    Light = 'light',
-  }
-
-  export let key = '_theme_'
-  export let theme: Theme = Theme.Light
-
-  const validTheme = (t: Theme) => Object.values(Theme).includes(t as Theme)
-
-  const handleThemeChange = (e: MediaQueryListEvent) => {
-    theme = e.matches ? Theme.Dark : Theme.Light
-  }
-
-  onMount(() => {
-    const darkMode = window.matchMedia(SCHEME)
-    const persistedTheme = localStorage[key]
-    if (validTheme(persistedTheme)) {
-      theme = persistedTheme
-    } else {
-      theme = darkMode.matches ? Theme.Dark : Theme.Light
-    }
-
-    darkMode.addEventListener('change', handleThemeChange)
-    return () => {
-      darkMode.removeEventListener('change', handleThemeChange)
-    }
-  })
-
-  afterUpdate(() => {
-    if (validTheme(theme)) {
-      localStorage[key] = theme
-    }
-  })
-  $: switchTheme = theme === Theme.Dark ? Theme.Light : Theme.Dark
-  $: document.body.className = theme
+  import Mode from './lib/Mode.svelte'
 </script>
 
 <header>
   <h3>https://dog.ceo/dog-api/</h3>
-  <Button on:click={() => (theme = switchTheme)}>
-    Switch to {switchTheme} mode
-  </Button>
+  <Mode />
 </header>
 <main>
   <ImagePreviewer />
