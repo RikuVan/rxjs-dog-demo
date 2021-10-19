@@ -1,11 +1,22 @@
-import { Subject, merge } from 'rxjs'
-import { filter, ignoreElements, map, switchMap, tap, withLatestFrom } from 'rxjs/operators'
+import { Subject, delay, merge, of } from 'rxjs'
+import {
+  distinctUntilChanged,
+  filter,
+  ignoreElements,
+  map,
+  pluck,
+  switchMap,
+  tap,
+  withLatestFrom,
+} from 'rxjs/operators'
 import { getImagesFor, imageViewerState$ } from '../state/imagePreviewer'
 
 import type { Observable } from 'rxjs'
 import { createState } from './createState'
 import { keyboardNavigation } from '../state/keyboard'
 import { routeParams } from '../state/router'
+
+const AUTO_SLIDE_DELAY = 8000
 
 type CarouselState = {
   images: string[]
@@ -14,21 +25,27 @@ type CarouselState = {
 
 const initialState = { currentIndex: 0, images: [] } as CarouselState
 
+const getNextIndex = (
+  change: number,
+  { images, currentIndex }: { images: string[]; currentIndex: number }
+) => {
+  let nextIndex = currentIndex + change
+  if (nextIndex <= 0) {
+    nextIndex = images.length - 1
+  } else if (nextIndex >= images.length - 1) {
+    nextIndex = 0
+  }
+  return nextIndex
+}
+
 const createMoveIndexCommands = (
   buttonClicks$: Observable<number>,
   carouselState$: Observable<CarouselState>,
   commandSubject$: Subject<Partial<CarouselState>>
 ) =>
   buttonClicks$.pipe(
-    withLatestFrom(carouselState$, (change: number, { images, currentIndex }) => ({
-      canUpdate: currentIndex + change >= 0 && currentIndex + change <= images.length - 1,
-      currentIndex,
-      change,
-    })),
-    tap(
-      ({ canUpdate, currentIndex, change }) =>
-        canUpdate && commandSubject$.next({ currentIndex: currentIndex + change })
-    ),
+    withLatestFrom(carouselState$, getNextIndex),
+    tap((nextIndex) => commandSubject$.next({ currentIndex: nextIndex })),
     ignoreElements()
   )
 
@@ -38,9 +55,7 @@ export function createCarouselState() {
 
   const images$ = routeParams.pipe(
     filter(Boolean),
-    switchMap((breed) => {
-      return getImagesFor(breed, imageViewerState$)
-    })
+    switchMap((breed) => getImagesFor(breed, imageViewerState$))
   )
   const commands$ = merge(
     images$.pipe(map((images) => ({ images, currentIndex: 0 } as CarouselState))),
@@ -59,9 +74,21 @@ export function createCarouselState() {
     carouselState$,
     commandSubject$
   )
-  const currentImage$ = merge(commandButtons$, commandFromKeyboard$, carouselState$).pipe(
-    map(({ images, currentIndex }) => images[currentIndex])
+
+  const autoMove$ = carouselState$.pipe(
+    pluck('currentIndex'),
+    distinctUntilChanged(),
+    switchMap(() => of(1).pipe(delay(AUTO_SLIDE_DELAY)))
   )
+
+  const autoMoveCommand$ = createMoveIndexCommands(autoMove$, carouselState$, commandSubject$)
+
+  const currentImage$ = merge(
+    commandButtons$,
+    commandFromKeyboard$,
+    autoMoveCommand$,
+    carouselState$
+  ).pipe(map(({ images, currentIndex }) => images[currentIndex]))
 
   return { currentImage$, buttonClicks$, commandSubject$ }
 }
