@@ -11,4 +11,7 @@ export const routeParams = new Observable<string>((subscriber) => {
       subscriber.next(params?.breed)
     })
     .listen()
-}).pipe(distinctUntilChanged(), shareReplay(1))
+  return () => {
+    router.unlisten()
+  }
+}).pipe(shareReplay(1))
