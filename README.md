@@ -1,3 +1,13 @@
+# Rxjs + Svelte
+
+This is primary a demo in using Observables, particularly Rxjs, to handle all the state in an app--in this case the app happens to be Svelte but this doesn't really matter much, except for a few syntax niceties offered by Svelte for handling subscriptions.
+
+## TODOs
+
+1. Move the mode handling to Rxjs
+2. Fix bug - if you click, close and try to reopen same modal for breed, it fails
+3. Add auto changing of image in carousel after some delay (should reset after user changes). Might also want to improve the logic so that the index scrolls back to the front or end when it hits 0 or end of images.
+
 # Svelte + TS + Vite
 
 This template should help get you started developing with Svelte and TypeScript in Vite.

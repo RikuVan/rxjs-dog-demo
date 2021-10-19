@@ -6,7 +6,9 @@
 </script>
 
 <header>
-  <h3>https://dog.ceo/dog-api/</h3>
+  <a href="https://dog.ceo/dog-api/">
+    <h3>https://dog.ceo/dog-api/</h3>
+  </a>
   <Mode />
 </header>
 <main>
@@ -28,6 +30,60 @@
     --spinner-animation-duration: 1.2s;
     --image-size: 200px;
     --text-dark: hsla(0, 0%, 21.2%, 1);
+
+    @media print {
+      body,
+      pre,
+      code,
+      summary,
+      details,
+      button,
+      input,
+      textarea {
+        background-color: #fff;
+      }
+
+      button,
+      input,
+      textarea {
+        border: 1px solid #000;
+      }
+
+      body,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      pre,
+      code,
+      button,
+      input,
+      textarea,
+      footer,
+      summary,
+      strong {
+        color: #000;
+      }
+
+      summary::marker {
+        color: #000;
+      }
+
+      summary::-webkit-details-marker {
+        color: #000;
+      }
+
+      tbody tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+
+      a {
+        color: #00f;
+        text-decoration: underline;
+      }
+    }
   }
 
   :global(body.light) {
@@ -47,6 +103,7 @@
     --button-base: #d0cfcf;
     --button-hover: #9b9b9b;
     --button-selected: #898686;
+    --arrow-color: var(--text-muted);
     --arrow-hover: var(--text-bright);
     --variable: hsla(121.7, 48.2%, 43.1%, 1);
     --highlight: hsla(60, 100%, 50%, 1);
@@ -70,7 +127,8 @@
     --code: #ffbe85;
     --button-base: #0c151c;
     --button-hover: #040a0f;
-    --arrow-hover: var(--button-hover);
+    --arrow-color: var(--text-muted);
+    --arrow-hover: var(--text-bright);
     --button-selected: var(--selection);
     --variable: #d941e2;
     --highlight: #efdb43;

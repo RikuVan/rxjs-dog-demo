@@ -33,10 +33,10 @@
   }
 
   img.carousel {
-    height: auto;
+    height: 100%;
     width: 100%;
     transition: 0.6s ease;
-    object-fit: cover;
+    object-fit: contain;
     display: relative;
   }
 

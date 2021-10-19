@@ -23,7 +23,8 @@
 
 <style>
   .carousel {
-    display: flex;
+    display: grid;
+    grid-template-columns: 50px auto 50px;
     position: relative;
     max-height: 100%;
     overflow: hidden;
@@ -36,30 +37,20 @@
   }
 
   .control-arrow {
-    position: absolute;
-    transition: all 0.25s ease-in;
     opacity: 0.3;
     background: none;
     border: 0;
-    font-size: 32px;
+    font-size: 46px;
     cursor: pointer;
-    top: 0;
-    bottom: 0;
-    background: lightgray;
-    color: var(--text-dark);
+    margin: auto;
+    color: var(--arrow-color);
+    width: 80px;
+    z-index: 2;
   }
 
   .control-arrow:hover {
     opacity: 0.5;
     color: var(--arrow-hover);
-  }
-
-  .left {
-    left: 0px;
-  }
-
-  .right {
-    right: 0px;
   }
 
   button {
@@ -82,11 +73,12 @@
   }
 
   .chevron-right:before {
-    left: -0.1em;
+    margin-left: -1em;
     transform: rotate(45deg);
   }
 
   .chevron-left:before {
+    margin-left: -1em;
     transform: rotate(-135deg);
   }
 </style>

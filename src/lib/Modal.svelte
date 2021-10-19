@@ -60,7 +60,9 @@
     <!-- [3] -->
     <div class="modal-container" role="dialog" aria-modal="true" aria-labelledby="carousel-modal">
       <header class="modal-header">
-        <h2 class="modal-title">{$routeParams}</h2>
+        <a href={'https://en.wikipedia.org/wiki/' + $routeParams} target="_blank"
+          ><h2 class="modal-title">{$routeParams}</h2></a
+        >
         <!-- [4] -->
         <button
           type="button"
@@ -116,6 +118,10 @@
     align-items: center;
   }
 
+  .modal-header > a {
+    text-decoration: none;
+  }
+
   .modal-title {
     margin-top: 0;
     margin-bottom: 0;
@@ -125,6 +131,11 @@
     color: var(--text-main);
     box-sizing: border-box;
     text-transform: capitalize;
+    cursor: pointer;
+  }
+
+  .modal-title:hover {
+    color: var(--text-bright);
   }
 
   .modal-close {
