@@ -8,6 +8,13 @@ This is primary a demo in using Observables, particularly Rxjs, to handle all th
 2. Fix bug - if you click, close and try to reopen same modal for breed, it fails
 3. Add auto changing of image in carousel after some delay (should reset after user changes). Might also want to improve the logic so that the index scrolls back to the front or end when it hits 0 or end of images.
 
+## Alternative implementations
+
+I have used a simpler version of this dog viewer app to demo other things, if you would like to compare with other kinds of state handling:
+
+- 2018 [Redux-ish version with Preact](https://glitch.com/edit/#!/handsomely-twister): This was a demo in using futures instead of promises, using Fluture, Sanctuary, Unistore, and Preact.
+- 2020 [Pure Svelte state handling](https://github.com/RikuVan/service-workers-and-pouchdb): This was a demo of service workers using only Svelte for state handling - it is quite concise in comparison but simpler than the present app.
+
 # Svelte + TS + Vite
 
 This template should help get you started developing with Svelte and TypeScript in Vite.
